@@ -3,10 +3,9 @@ import numpy as np
 import os
 
 
-def processing():
+def record_processing():
     # transforming csv file into pandas dataframe
-    pDir = os.path.dirname(os.getcwd())
-    recordsDataframe = pd.read_csv(pDir + "\\records\\records.csv")
+    recordsDataframe = pd.read_csv(os.getcwd() + "\\records\\records.csv")
 
     # Intialising empty dataframes to store the buy records and the sell records
     buyRecords = pd.DataFrame(columns=["Date","Share", "Price","Units", "Brokerage Fee"])
@@ -39,9 +38,8 @@ def processing():
             else:
                 recordInfo = {"Date": date, "Share": shareName, "Price": price, "Units": units, "Brokerage Fee": round(price * units - currRecord["Credit($)"], 2)}
                 sellRecords = pd.concat([sellRecords, pd.DataFrame([recordInfo])], ignore_index=True)
-
     return buyRecords, sellRecords
 
 
 if __name__ == "__main__":
-    print(processing())
+    print(record_processing())
